@@ -1,10 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AttendIQ</title>
+  <title>AttendIQ Dashboard</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .box {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: auto;
+    }
+    input {
+      width: 70%;
+      padding: 8px;
+    }
+    button {
+      padding: 8px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    li {
+      margin-top: 10px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Welcome to AttendIQ 🚀</h1>
-  <p>Your website is now live!</p>
+
+<h1>📊 AttendIQ Dashboard</h1>
+
+<div class="box">
+  <input id="name" placeholder="Enter student name">
+  <button onclick="addStudent()">Add</button>
+
+  <ul id="list"></ul>
+</div>
+
+<script>
+function addStudent() {
+  let name = document.getElementById("name").value;
+
+  if(name === "") return;
+
+  let li = document.createElement("li");
+
+  li.innerHTML = name + 
+    " <button onclick='mark(this,\"green\")'>Present</button>" +
+    " <button onclick='mark(this,\"red\")'>Absent</button>";
+
+  document.getElementById("list").appendChild(li);
+  document.getElementById("name").value = "";
+}
+
+function mark(btn, color) {
+  btn.parentNode.style.color = color;
+}
+</script>
+
 </body>
 </html>
