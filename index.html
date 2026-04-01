@@ -1,67 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AttendIQ Dashboard</title>
-  <style>
-    body {
-      font-family: Arial;
-      background: #f5f5f5;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-    }
-    .box {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      max-width: 400px;
-      margin: auto;
-    }
-    input {
-      width: 70%;
-      padding: 8px;
-    }
-    button {
-      padding: 8px;
-      margin: 5px;
-      cursor: pointer;
-    }
-    li {
-      margin-top: 10px;
-    }
-  </style>
+  <title>AttendIQ Login</title>
 </head>
 
 <body>
 
-<h1>📊 AttendIQ Dashboard</h1>
+<h2>Login</h2>
 
-<div class="box">
-  <input id="name" placeholder="Enter student name">
-  <button onclick="addStudent()">Add</button>
+<input id="id" placeholder="Admission ID"><br><br>
+<input id="pass" placeholder="Password" type="password"><br><br>
 
-  <ul id="list"></ul>
+<button onclick="login()">Login</button>
+
+<div id="dashboard" style="display:none;">
+  <h3>Welcome Student</h3>
+  <p>Your Attendance: <span id="att"></span>%</p>
 </div>
 
 <script>
-function addStudent() {
-  let name = document.getElementById("name").value;
+let users = {
+  "A2025BBA11313": { password: "1234", attendance: 78 },
+  "student2": { password: "1111", attendance: 65 }
+};
 
-  if(name === "") return;
+function login() {
+  let id = document.getElementById("id").value;
+  let pass = document.getElementById("pass").value;
 
-  let li = document.createElement("li");
-
-  li.innerHTML = name + 
-    " <button onclick='mark(this,\"green\")'>Present</button>" +
-    " <button onclick='mark(this,\"red\")'>Absent</button>";
-
-  document.getElementById("list").appendChild(li);
-  document.getElementById("name").value = "";
-}
-
-function mark(btn, color) {
-  btn.parentNode.style.color = color;
+  if(users[id] && users[id].password === pass){
+    document.getElementById("dashboard").style.display = "block";
+    document.getElementById("att").innerText = users[id].attendance;
+  } else {
+    alert("Wrong ID or Password");
+  }
 }
 </script>
 
